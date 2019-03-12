@@ -3,8 +3,8 @@
 using std::cout;
 using namespace std;
 
-const int rows = 10;
-const int columns = 10;
+const int rows = 40;
+const int columns = 40;
 int cell[rows][columns];
 
 //print the grid
@@ -12,7 +12,11 @@ void printgrid (){
   std:: cout << "_______________\n";
 for(int i = 1; i<=rows-1; i++){
   for(int q = 1; q<=columns-1; q++){
-    std:: cout << "[" << cell[i][q] << "]";
+    if(cell[i][q] == 1)
+      std:: cout << "|█";
+    else
+      std:: cout << "| ";
+  //  std:: cout << "[" << cell[i][q] << "]";
     fflush(stdout);
     //enable for exact location printing
     //std:: cout << q << "," << i;
@@ -55,15 +59,9 @@ void updategrid ()
 {
 for(int i = 1; i<=rows-1; i++){
   for(int q = 1; q<=columns-1; q++){
-
-    //left occupied? 2 = 0 3 = 1
-    if(cell[i-1][q] == 0){
+    //left unoccupied? ([i-1][q] == 0) (up:[i][q+1]) 2 = 0 3 = 1
+    if(cell[i-1][q] == 0)
       cell[i][q-1] = 3;
-    }
-
-    if(cell[i][q] == 1){
-      cell[i][q] = 2;
-    }
   }
   //visualize updating
   //std:: cout << endl;
