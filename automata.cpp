@@ -3,11 +3,8 @@
 using std::cout;
 using namespace std;
 
-//print a grid lmao
-
-//
-const int rows = 7;
-const int columns = 7;
+const int rows = 10;
+const int columns = 10;
 int cell[rows][columns];
 
 //print the grid
@@ -44,9 +41,9 @@ for(int i = 1; i<=rows-1; i++){
 //clear the grid
 void cleargrid ()
 {
-for(int i = 1; i<=rows-1; i++)
+for(int i = 1; i<=rows; i++)
  {
-  for(int q = 1; q<=columns-1; q++)
+  for(int q = 1; q<=columns; q++)
   {
     cell[i][q] = 0;
   }
@@ -58,8 +55,10 @@ void updategrid ()
 {
 for(int i = 1; i<=rows-1; i++){
   for(int q = 1; q<=columns-1; q++){
-    if(cell[i][q] == 0){
-      cell[i][q] = 3;
+
+    //left occupied? 2 = 0 3 = 1
+    if(cell[i-1][q] == 0){
+      cell[i][q-1] = 3;
     }
 
     if(cell[i][q] == 1){
