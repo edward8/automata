@@ -96,10 +96,10 @@ for(int i = 1; i<=rows-1; i++){
     if(neighbors[i][q] == 2 || neighbors[i][q] == 3)
       cell[i][q] = 3;
     }
-  if(cell[i][q] == 0)
+  if(cell[i][q] != 1)
     {
-     if(neighbors[i][q] == 3)
-         cell[i][q] = 3;
+     if(neighbors[i][q] == 2)
+         cell[i][q] = 1;
      }
   }
   //visualize updating
@@ -122,9 +122,18 @@ std:: cout << "rows:" << rows - 1 << "columns:" << columns - 1 << endl;
 //clear the grid
 cleargrid();
 
+cell[19][19] = 1;
+cell[20][18] = 1;
+cell[18][17] = 1;
+cell[19][17] = 1;
+cell[20][17] = 1;
+cell[20][20] = 1;
+cell[21][21] = 1;
+cell[17][17] = 1;
+
 printgrid();
 
-stepgrid(2);
+stepgrid(10);
 
 return 0;
 }
