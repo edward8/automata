@@ -54,14 +54,15 @@ for(int i = 1; i<=rows; i++)
  }
 }
 
+int neighbor[rows][columns];
 //update the grid (i=row, q=column)
+//left unoccupied? ([i-1][q] == 0) (up:[i][q+1]) 2 = 0 3 = 1
+/* if(cell[i+1][q+1] == 0) then cell[i+1][q] = 3;*/
 void updategrid ()
 {
 for(int i = 1; i<=rows-1; i++){
   for(int q = 1; q<=columns-1; q++){
-    //left unoccupied? ([i-1][q] == 0) (up:[i][q+1]) 2 = 0 3 = 1
-    if(cell[i-1][q] == 0)
-      cell[i][q-1] = 3;
+    
   }
   //visualize updating
   //std:: cout << endl;
