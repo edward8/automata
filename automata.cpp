@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cmath>
+#include <thread>
+#include <chrono>
 using std::cout;
 using namespace std;
 
@@ -10,8 +12,8 @@ int cell[rows][columns];
 //print the grid
 void printgrid (){
   std:: cout << "_______________\n";
-for(int i = 1; i<=rows-1; i++){
-  for(int q = 1; q<=columns-1; q++){
+for(int q = 1; q<=rows-1; q++){
+  for(int i = 1; i<=columns-1; i++){
     if(cell[i][q] == 1)
       std:: cout << "|█";
     else
@@ -29,8 +31,8 @@ for(int i = 1; i<=rows-1; i++){
 
 
 void bakegrid (){
-for(int i = 1; i<=rows-1; i++){
-  for(int q = 1; q<=columns-1; q++){
+for(int q = 1; q<=rows-1; q++){
+  for(int i = 1; i<=columns-1; i++){
     //2 = 0, 3 = 1
         if(cell[i][q] == 2){
           cell[i][q] = 0;
@@ -45,9 +47,9 @@ for(int i = 1; i<=rows-1; i++){
 //clear the grid
 void cleargrid ()
 {
-for(int i = 1; i<=rows; i++)
+for(int q = 1; q<=rows; q++)
  {
-  for(int q = 1; q<=columns; q++)
+  for(int i = 1; i<=columns; i++)
   {
     cell[i][q] = 0;
   }
@@ -60,8 +62,8 @@ int neighbors[rows][columns];
 /* if(cell[i+1][q+1] == 0) then cell[i+1][q] = 3;*/
 void updategrid ()
 {
-for(int i = 1; i<=rows-1; i++){
-  for(int q = 1; q<=columns-1; q++){
+for(int q = 1; q<=rows-1; q++){
+  for(int i = 1; i<=columns-1; i++){
     neighbors[i][q] = 0;
 //dudes above me
     if(cell[i-1][q+1] == 1)
@@ -93,7 +95,7 @@ for(int i = 1; i<=rows-1; i++){
     if(neighbors[i][q] > 3)
       cell[i][q] = 2;
 
-    if(neighbors[i][q] == 2 || neighbors[i][q] == 3)
+    if(neighbors[i][q] == 2 || neighbors[i][q] > 2)
       cell[i][q] = 3;
     }
   if(cell[i][q] != 1)
@@ -114,6 +116,7 @@ int stepgrid (int iterations){
     updategrid();
     bakegrid();
     printgrid();
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
   }
 }
 
@@ -122,6 +125,7 @@ std:: cout << "rows:" << rows - 1 << "columns:" << columns - 1 << endl;
 //clear the grid
 cleargrid();
 
+/*
 cell[19][19] = 1;
 cell[20][18] = 1;
 cell[18][17] = 1;
@@ -130,10 +134,14 @@ cell[20][17] = 1;
 cell[20][20] = 1;
 cell[21][21] = 1;
 cell[17][17] = 1;
+*/
+cell[2][1] = 1;
+std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
 
 printgrid();
 
-stepgrid(10);
+stepgrid(0);
 
 return 0;
 }
