@@ -5,20 +5,25 @@
 using std::cout;
 using namespace std;
 
-const int rows = 40;
-const int columns = 40;
+const int rows = 20;
+const int columns = 20;
 int cell[rows][columns];
 
 //print the grid
 void printgrid (){
-  std:: cout << "_______________\n";
-for(int q = 1; q<=rows-1; q++){
+  for(int i = -3; i<=columns; i++){
+    std:: cout << "_";
+  }
+  std:: cout << "\n";
+for(int q = rows; q>=1; q--){
   for(int i = 1; i<=columns-1; i++){
     if(cell[i][q] == 1)
       std:: cout << "|█";
     else
       std:: cout << "| ";
   //  std:: cout << "[" << cell[i][q] << "]";
+    if(i==columns-1)
+      std:: cout << "|";
     fflush(stdout);
     //enable for exact location printing
     //std:: cout << q << "," << i;
@@ -121,7 +126,7 @@ int stepgrid (int iterations){
 }
 
 int main(){
-std:: cout << "rows:" << rows - 1 << "columns:" << columns - 1 << endl;
+std:: cout << "rows:" << rows << "columns:" << columns-1 << endl;
 //clear the grid
 cleargrid();
 
@@ -135,7 +140,10 @@ cell[20][20] = 1;
 cell[21][21] = 1;
 cell[17][17] = 1;
 */
+cell[1][1] = 1;
 cell[2][1] = 1;
+cell[3][1] = 1;
+cell[4][2] = 1;
 std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
 
